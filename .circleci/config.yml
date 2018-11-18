@@ -34,19 +34,13 @@ jobs:
       #- run: xvfb-run -a npm run test:prod  #virtual screen run
       - run: npm run test:prod-headless
       - run: npm run build
-
-      #- store_test_results:
-      #          path: test-results.xml
-      - run:
-          command: |
-            yarn add ava tap-xunit --dev # or you could use npm
-            mkdir -p ~/reports
-            ava --tap | tap-xunit > ~/reports/ava.xml
-          when: always
-      - store_test_results:
-          path: ~/reports
+      
       - store_artifacts:
-          path: ~/reports 
+          path: /code/test-results.xml
+          destination: prefix
+      - store_test_results:
+                path: test-results.xml
+store_test_results
     # The deploy job
     deploy:
         working_directory: ~/AngularCircleci
