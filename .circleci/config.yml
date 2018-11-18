@@ -9,15 +9,20 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: AngularCircleci-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          #key: AngularCircleci-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
       - run: npm install
       - run: npm install bootstrap
       - run: npm install jquery
       - run: npm install popper.js
      
       - save_cache:
-          key: AngularCircleci-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          #key: AngularCircleci-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
              - "node_modules"
-      - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
-      - run: npm run e2e --webdriver-update=false --protractor-config=./e2e/protractor-ci.conf.js
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm run test:prod-headless
+      - run: npm run build:prod
