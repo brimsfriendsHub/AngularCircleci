@@ -14,9 +14,10 @@ jobs:
       - run: npm install bootstrap
       - run: npm install jquery
       - run: npm install popper.js
+      
       - save_cache:
           key: AngularCircleci-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
              - "node_modules"
       - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
-      - run: npm run e2e --serve=false
+      - run: npm run e2e --webdriver-update=false --protractor-config=./e2e/protractor-ci.conf.js
