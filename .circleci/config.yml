@@ -34,6 +34,6 @@ jobs:
 
       - run: npm run test:prod-headless
       - run: npm run build
-      
+
       - store_test_results:
-        path: test-results
+                path: test-results.xml
