@@ -5,7 +5,16 @@ jobs:
     docker:
       # specify the version you desire here
       # see https://hub.docker.com/r/circleci/node/tags/
-      - image: circleci/node:8.11.3
+      - image: circleci/node:8.12.0-browsers
+      #- image: selenium/standalone-chrome:3.1.0
+      #- image: circleci/python:3.4-browsers
+      - image: mysql:5.7
+    environment:
+          CHROME_BIN: "/usr/bin/google-chrome"
+    - type: shell
+      name: Starting Xvfb (for Browser Tests)
+      command: Xvfb :99 -screen 0 1280x1024x24
+   background: true
     steps:
       - checkout
       - restore_cache:
@@ -25,4 +34,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm run test:prod-headless
-      - run: npm run build:prod
+      - run: npm run build
