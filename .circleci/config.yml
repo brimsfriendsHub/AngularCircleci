@@ -5,7 +5,7 @@ jobs:
     docker:
       # specify the version you desire here
       # see https://hub.docker.com/r/circleci/node/tags/
-      - image: circleci/node:7.10.1
+      - image: circleci/node:8.11.3
     steps:
       - checkout
       - restore_cache:
