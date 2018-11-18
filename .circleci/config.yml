@@ -40,7 +40,7 @@ jobs:
           
       - store_test_results:
                 path: test-results
-store_test_results
+
     # The deploy job
     deploy:
         working_directory: ~/AngularCircleci
