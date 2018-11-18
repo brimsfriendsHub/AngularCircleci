@@ -38,15 +38,15 @@ jobs:
       #- store_test_results:
       #          path: test-results.xml
       - run:
-          name: Save test results
           command: |
-            mkdir -p ~/cucumber
-            bundle exec cucumber pretty --format json --out ~/cucumber/tests.cucumber
+            yarn add ava tap-xunit --dev # or you could use npm
+            mkdir -p ~/reports
+            ava --tap | tap-xunit > ~/reports/ava.xml
           when: always
       - store_test_results:
-          path: ~/cucumber
+          path: ~/reports
       - store_artifacts:
-          path: ~/cucumber   
+          path: ~/reports 
     # The deploy job
     deploy:
         working_directory: ~/AngularCircleci
