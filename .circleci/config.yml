@@ -35,8 +35,13 @@ jobs:
       - run: npm run test:prod-headless
       - run: npm run build
 
+      #- store_test_results:
+      #          path: test-results.xml
+      - store_artifacts:
+          path: target/surefire-reports
+          destination: tr1
       - store_test_results:
-                path: test-results.xml
+          path: target/surefire-reports
     # The deploy job
     deploy:
         working_directory: ~/AngularCircleci
