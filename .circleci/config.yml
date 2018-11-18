@@ -8,7 +8,7 @@ jobs:
       - image: circleci/node:8.12.0-browsers
       #- image: selenium/standalone-chrome:3.1.0
       #- image: circleci/python:3.4-browsers
-      - image: mysql:5.7
+      #- image: mysql:5.7
     environment:
           CHROME_BIN: "/usr/bin/google-chrome"      
       #name: Starting Xvfb (for Browser Tests)
