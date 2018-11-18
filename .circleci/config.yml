@@ -11,7 +11,7 @@ jobs:
       - image: mysql:5.7
     environment:
           CHROME_BIN: "/usr/bin/google-chrome"
-    - type: shell
+      type: shell
       name: Starting Xvfb (for Browser Tests)
       command: Xvfb :99 -screen 0 1280x1024x24
    background: true
