@@ -34,12 +34,6 @@ jobs:
 
       - run: npm run test:prod-headless
       - run: npm run build
-
-      - deploy:
-        command: |
-      if [ "${CIRCLE_BRANCH}" == "master" ]; then
-        ansible-playbook site.yml
-      fi
-
+      
       - store_test_results:
         path: test-results
