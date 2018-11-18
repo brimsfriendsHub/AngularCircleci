@@ -37,11 +37,16 @@ jobs:
 
       #- store_test_results:
       #          path: test-results.xml
-      - store_artifacts:
-          path: target/surefire-reports
-          destination: tr1
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/cucumber
+            bundle exec cucumber pretty --format json --out ~/cucumber/tests.cucumber
+          when: always
       - store_test_results:
-          path: target/surefire-reports
+          path: ~/cucumber
+      - store_artifacts:
+          path: ~/cucumber   
     # The deploy job
     deploy:
         working_directory: ~/AngularCircleci
