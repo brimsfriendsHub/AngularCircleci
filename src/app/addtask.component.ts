@@ -104,7 +104,7 @@ import { SharedServiceService } from './taskservice.service';
         // tslint:disable-next-line:max-line-length
 
             // tslint:disable-next-line:max-line-length
-        this.validationError = (valIn.endDate < valIn.startDate) ? 'End Date should greater than start date' : (new Date(valIn.startDate) < currentDate || new Date(valIn.endDate) < currentDate) ? 'Date should be future date.':'';
+        this.validationError = (valIn.endDate < valIn.startDate) ? 'End Date should greater than start date' : (new Date(valIn.startDate) < currentDate || new Date(valIn.endDate) < currentDate) ? 'Date should be future date.' : '';
         // if (valIn.endDate < valIn.startDate) {
         //     this.validationError = 'End Date should greater than start date';
         // } else if (valIn.priority < 1) {

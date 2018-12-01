@@ -101,7 +101,7 @@ describe('Add Task Methods', () => {
         comp.ngOnInit();
       });
 
-    it('validate date func', () => {
+    it('validate past date func', () => {
 
         const tsk = new TaskModel();
         tsk.taskId = 0;
@@ -112,6 +112,22 @@ describe('Add Task Methods', () => {
         tsk.priorityTo = null;
         tsk.startDate = '2018-11-10 00:00:00.000';
         tsk.endDate = '2018-11-11 00:00:00.000';
+        tsk.IsEnded = false;
+
+        expect(comp.validationDt(tsk)).toBe('Date should be future date.');
+      });
+
+      it('validate current date func', () => {
+
+        const tsk = new TaskModel();
+        tsk.taskId = 0;
+        tsk.taskName = 'Today Task update1';
+        tsk.parentTaskId = 0;
+        tsk.parentTaskName = 'Parent Task1';
+        tsk. priority = 1;
+        tsk.priorityTo = null;
+        tsk.startDate = '2018-12-01 00:00:00.000';
+        tsk.endDate = '2018-12-01 00:00:00.000';
         tsk.IsEnded = false;
 
         expect(comp.validationDt(tsk)).toBe('');
