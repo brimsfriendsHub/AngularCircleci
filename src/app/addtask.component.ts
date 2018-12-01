@@ -32,14 +32,41 @@ import { SharedServiceService } from './taskservice.service';
             parentTask: [''],
             startDate: ['', [Validators.required]], // , this.isValiddate('startDate')
             endDate: ['', [Validators.required]] // , this.isValiddate('endDate')
-        });
+        }
+        //, {validator: this.dateLessThan('startDate', 'endDate')}
+        );
     }
+    // dateLessThan(from: string, to: string) {
+    //     return (group: FormGroup): {[key: string]: any} => {
+    //      let startDate = group.controls[from];
+    //      let endDate = group.controls[to];
+    //      let currentDate = new Date();
+    //     currentDate.setHours(0, 0, 0, 0);
+    //      if (new Date(startDate.value) > new Date(endDate.value)) {
+    //        return {
+    //          dates: 'Date from should be less than Date to'
+    //        };
+    //      } else if (new Date(startDate.value) < currentDate || new Date(endDate.value) < currentDate) {
+    //         return {
+    //         dates: 'Date should be future date.'
+    //         };
+    //     }
+    //      return {};
+    //     };
+    // }
     onSubmit() {
         this.submitted = true;
         this.validationError = '';
+        // tslint:disable-next-line:no-debugger
+
+        if (this.addtaskForm.invalid) {
+            return;
+        }
+
         // stop here if form is invalid
         if (!this.addtaskForm.invalid) {
                  const val = this.addtaskForm.value;
+
                   if (this.validationDt(val).length < 1) {
                     if (this.taskId === 0) {
                         this._service.addTask(this.assignTaskValues(val)).subscribe(data => {
@@ -55,6 +82,7 @@ import { SharedServiceService } from './taskservice.service';
         }
 
     }
+    get f() { return this.addtaskForm.controls; }
 
     assignTaskValues(val: any) {
         const ptsk = (val.parentTask == null || val.parentTask === undefined) ? this.pTaskName : val.parentTask;
@@ -70,19 +98,27 @@ import { SharedServiceService } from './taskservice.service';
 
     validationDt(valIn) {
 
+        // tslint:disable-next-line:prefer-const
+        var currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
         // tslint:disable-next-line:max-line-length
+        if (new Date(valIn.startDate) < currentDate || new Date(valIn.endDate) < currentDate) {
+            this.validationError = 'Date should be future date.';
+        } else {
+            // tslint:disable-next-line:max-line-length
         this.validationError = (valIn.endDate < valIn.startDate) ? 'End Date should greater than start date' : (valIn.priority < 1) ? 'Please mark priority greater than 0' : '';
         // if (valIn.endDate < valIn.startDate) {
         //     this.validationError = 'End Date should greater than start date';
         // } else if (valIn.priority < 1) {
         //     this.validationError = 'Please mark priority greater than 0';
         // }
+        }
         return this.validationError;
     }
 
     assignTaskValue(val: TaskModel) {
         // tslint:disable-next-line:no-debugger
-        debugger;
+
         if (val != null && val !== undefined) {
             this.addtaskForm.setValue({
                 taskName: val.taskName,

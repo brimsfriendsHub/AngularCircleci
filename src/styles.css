@@ -68,3 +68,14 @@ a:active {
 .disabled {
     cursor: not-allowed;
 }
+
+
+/* .form-group .required .control-label:after {
+    content: "*";
+    color: red;
+} */
+
+label.required:after {
+    content: " *";
+    color: red;
+}

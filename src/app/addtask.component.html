@@ -1,7 +1,6 @@
 <div>
     <label class="alert-danger">{{validationError}}</label>
 </div>
-
 <div class="card">
     <div class="card-body">
         <div class="row form-group">
@@ -9,22 +8,32 @@
                 <form [formGroup]="addtaskForm" (ngSubmit)="onSubmit()">
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label for="validationtaskName">Task</label>
+                            <label for="validationtaskName" class="required">Task</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" formControlName="taskName" id="validationtaskName" class="form-control" required/>
+                            <input type="text" formControlName="taskName" id="validationtaskName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }" required/>
+                            <div *ngIf="submitted && f.taskName.errors" class="alert-danger">
+                                <div *ngIf="f.taskName.errors.required">Task is required</div>
+                            </div>
                         </div>
+                        <!-- 
+                        <div>
+                            <p *ngIf="addtaskForm.get('taskName').hasError('required') && addtaskForm.submitted">Task Name is required</p>
+                        </div> -->
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label>priority</label>
+                            <label class="control-label required">priority</label>
                         </div>
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-6 text-left">0</div>
                                 <div class="col-md-6 text-right">30</div>
                             </div>
-                            <div><input type="range" formControlName="priority" class="custom-range" min="0" max="30" value="priorityValue" id="customRange2" required></div>
+                            <div><input type="range" formControlName="priority" class="custom-range" min="0" max="30" value="priorityValue" id="customRange2" [ngClass]="{ 'is-invalid': submitted && f.priority.errors }" required></div>
+                            <div *ngIf="submitted && f.priority.value==0" class="alert-danger">
+                                <div>Priority is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -34,24 +43,30 @@
                         <div class="col-md-8">
                             <input type="text" formControlName="parentTask" class="form-control" />
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-3">
-                            <label>Start Date</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="date" class="form-control" formControlName="startDate" placeholder="yyyy-MM-dd" name="startdp" required>
 
-                        </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-3">
-                            <label>End Date</label>
+                            <label class="control-label required">Start Date</label>
                         </div>
                         <div class="col-md-8">
-                            <input class="form-control" type="date" formControlName="endDate" placeholder="yyyy-MM-dd" name="enddp" required>
+                            <input type="date" class="form-control" formControlName="startDate" placeholder="yyyy-MM-dd" name="startdp" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" required>
+                            <div *ngIf="submitted && f.startDate.errors" class="alert-danger">
+                                <div *ngIf="f.startDate.errors.required">Start Date is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label class="control-label required">End Date</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" type="date" formControlName="endDate" placeholder="yyyy-MM-dd" name="enddp" [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" required>
                             <!--pattern="\d{1,2}-\d{1,2}-\d{4}"-->
-
+                            <div *ngIf="submitted && f.endDate.errors" class="alert-danger">
+                                <div *ngIf="f.endDate.errors.required">End Date is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-group">
