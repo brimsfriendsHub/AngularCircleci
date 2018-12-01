@@ -32,7 +32,7 @@
                             </div>
                             <div><input type="range" formControlName="priority" class="custom-range" min="0" max="30" value="priorityValue" id="customRange2" [ngClass]="{ 'is-invalid': submitted && f.priority.errors }" required></div>
                             <div *ngIf="submitted && f.priority.value==0" class="alert-danger">
-                                <div>Priority is required</div>
+                                <div>Priority should be greater than 0</div>
                             </div>
                         </div>
                     </div>

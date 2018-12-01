@@ -102,17 +102,15 @@ import { SharedServiceService } from './taskservice.service';
         var currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0);
         // tslint:disable-next-line:max-line-length
-        if (new Date(valIn.startDate) < currentDate || new Date(valIn.endDate) < currentDate) {
-            this.validationError = 'Date should be future date.';
-        } else {
+
             // tslint:disable-next-line:max-line-length
-        this.validationError = (valIn.endDate < valIn.startDate) ? 'End Date should greater than start date' : (valIn.priority < 1) ? 'Please mark priority greater than 0' : '';
+        this.validationError = (valIn.endDate < valIn.startDate) ? 'End Date should greater than start date' : (new Date(valIn.startDate) < currentDate || new Date(valIn.endDate) < currentDate) ? 'Date should be future date.':'';
         // if (valIn.endDate < valIn.startDate) {
         //     this.validationError = 'End Date should greater than start date';
         // } else if (valIn.priority < 1) {
         //     this.validationError = 'Please mark priority greater than 0';
         // }
-        }
+
         return this.validationError;
     }
 
