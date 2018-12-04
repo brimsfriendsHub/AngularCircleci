@@ -14,7 +14,6 @@ let httpMock: HttpTestingController;
             imports : [HttpClientTestingModule],
             providers: [SharedServiceService]
         });
-
         service = TestBed.get(SharedServiceService);
         httpMock = TestBed.get(HttpTestingController);
     });
@@ -42,8 +41,7 @@ let httpMock: HttpTestingController;
         tsk.IsEnded = false;
 
         service.addTask(tsk).subscribe(data => {
-            // expect(data).toBeNaN();
-            // expect(data).toEqual(expectedValue);
+            // expect(data).toBeNaN();            
         });
 
         const request =  httpMock.expectOne(service.taskManagerUrl + 'addTask');
