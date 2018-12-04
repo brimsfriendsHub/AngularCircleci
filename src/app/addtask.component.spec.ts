@@ -7,10 +7,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { DatePipe } from '@angular/common';
 
 describe('Add Task Service', () => {
-
 let service: SharedServiceService;
 let httpMock: HttpTestingController;
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports : [HttpClientTestingModule],
