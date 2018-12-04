@@ -126,8 +126,8 @@ describe('Add Task Methods', () => {
         tsk.parentTaskName = 'Parent Task1';
         tsk. priority = 1;
         tsk.priorityTo = null;
-        tsk.startDate = '2018-12-01 00:00:00.000';
-        tsk.endDate = '2018-12-01 00:00:00.000';
+        tsk.startDate = '2018-12-31 00:00:00.000';
+        tsk.endDate = '2018-12-31 00:00:00.000';
         tsk.IsEnded = false;
 
         expect(comp.validationDt(tsk)).toBe('');
